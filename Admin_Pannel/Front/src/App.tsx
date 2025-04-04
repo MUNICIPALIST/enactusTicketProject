@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState } from 'react'
 import Login from './components/Login'
 import DataTable from './components/DataTable'
 import './styles.css'
@@ -67,26 +67,30 @@ const App = () => {
 
   return (
     <div className="container">
-      <div className="header">
+      <header className="header">
         <h1>MET GALA</h1>
-        <button className="logout-button" onClick={handleLogout}>Выйти</button>
-      </div>
-      <div className="buttons">
-        <button onClick={fetchData}>Показать данные</button>
-      </div>
-      {isLoading ? (
-        <div className="loading">Загрузка данных...</div>
-      ) : (
-        <>
-          {data.length > 0 ? (
-            <DataTable data={data} />
-          ) : (
-            <div className="no-data">
-              Нажмите кнопку "Показать данные" для загрузки
-            </div>
-          )}
-        </>
-      )}
+        <button className="logout-button" onClick={handleLogout}>
+          Выйти
+        </button>
+      </header>
+      
+      <main className="content-area">
+        <div className="buttons">
+          <button onClick={fetchData}>
+            {isLoading ? 'Загрузка...' : 'Показать данные'}
+          </button>
+        </div>
+
+        {isLoading ? (
+          <div className="loading">Загрузка данных...</div>
+        ) : data.length > 0 ? (
+          <DataTable data={data} />
+        ) : (
+          <div className="no-data">
+            Нажмите кнопку "Показать данные" для загрузки
+          </div>
+        )}
+      </main>
     </div>
   )
 }

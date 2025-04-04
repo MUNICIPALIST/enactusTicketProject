@@ -5,31 +5,32 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
+  if (!data || data.length === 0) {
+    return <div className="no-data">Нет данных для отображения</div>;
+  }
+
+  const columns = Object.keys(data[0]);
+
   return (
-    <div className="table-container">
-      <h2>Данные пользователей</h2>
-      <table className="data-table">
+    <div className="data-table">
+      <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>User ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Tickets</th>
-            <th>Data</th>
-            <th>Status</th>
+            {columns.map((column) => (
+              <th key={column}>{column}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.user_id}</td>
-              <td>{item.name}</td>
-              <td>{item.age}</td>
-              <td>{item.tickets}</td>
-              <td>{item.data}</td>
-              <td>{item.status}</td>
+          {data.map((row, index) => (
+            <tr key={index}>
+              {columns.map((column) => (
+                <td key={`${index}-${column}`}>
+                  {typeof row[column] === 'object' 
+                    ? JSON.stringify(row[column]) 
+                    : row[column]}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
