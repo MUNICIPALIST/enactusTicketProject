@@ -42,9 +42,10 @@ const App = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true)
-      const response = await fetch('http://localhost:8080/posts', {
+      const response = await fetch('http://176.123.178.135:8080/posts', {
         headers: {
-          Authorization: 'Basic ' + btoa('Aidana:admin'),
+          'Authorization': 'Basic QWlkYW5hOmFkbWlu',
+          'Access-Control-Allow-Origin': '*',
         },
       })
       if (!response.ok) {

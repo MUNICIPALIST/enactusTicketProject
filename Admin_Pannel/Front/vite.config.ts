@@ -12,16 +12,18 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://176.123.178.135:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     },
+    cors: true,
     allowedHosts: [
       'localhost',
       '127.0.0.1',
       'vencera.tech',
-      '.vencera.tech' // Разрешает все поддомены
+      '.vencera.tech',
+      '176.123.178.135'
     ]
   },
   preview: {
