@@ -10,6 +10,10 @@ COPY . .
 
 RUN npm run build
 
+# Устанавливаем глобально serve для раздачи статики
+RUN npm install -g serve
+
 EXPOSE 5173
 
-CMD ["npm", "run", "dev"]
+# Используем serve для раздачи собранного приложения
+CMD ["serve", "-s", "dist", "-l", "5173"]

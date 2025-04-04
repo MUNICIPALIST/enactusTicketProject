@@ -5,9 +5,11 @@ services:
     build: ./Front
     ports:
       - "5173:5173"
+    volumes:
+      - frontend_build:/app/dist
     environment:
-      - VITE_API_URL=http://176.123.178.135:8080
-      - HOST=0.0.0.0
+      - NODE_ENV=production
+      - VITE_API_URL=https://vencera.tech/api
     depends_on:
       - backend
 
@@ -24,4 +26,7 @@ services:
       - SERVER_PORT=8080
       - ADMIN_LOGIN=Aidana
       - ADMIN_PASSWORD=admin
-      - ALLOWED_ORIGINS=http://176.123.178.135:5173,https://vencera.tech
+      - ALLOWED_ORIGINS=https://vencera.tech
+
+volumes:
+  frontend_build:
