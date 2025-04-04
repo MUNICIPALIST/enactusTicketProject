@@ -6,7 +6,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=https://vencera.tech
+      - VITE_API_URL=http://localhost:8080
       - HOST=0.0.0.0
     depends_on:
       - backend
