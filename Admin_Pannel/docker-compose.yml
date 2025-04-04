@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./Front
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    depends_on:
+      - backend
+
+  backend:
+    build: ./Back
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=176.123.179.219
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=(9IeuwbxaDwckDue
+      - DB_NAME=enactusticket
+      - SERVER_PORT=8080
+      - ADMIN_LOGIN=Aidana
+      - ADMIN_PASSWORD=admin
