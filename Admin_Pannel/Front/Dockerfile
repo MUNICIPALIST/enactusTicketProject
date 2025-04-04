@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18-alpine as builder
 
 WORKDIR /app
 
@@ -10,10 +10,15 @@ COPY . .
 
 RUN npm run build
 
-# Устанавливаем глобально serve для раздачи статики
-RUN npm install -g serve
+# Используем nginx для раздачи статики
+FROM nginx:alpine
+
+# Копируем собранные файлы в директорию nginx
+COPY --from=builder /app/dist /usr/share/nginx/html/aidana
+
+# Копируем конфигурацию nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 5173
 
-# Используем serve для раздачи собранного приложения
-CMD ["serve", "-s", "dist", "-l", "5173"]
+CMD ["nginx", "-g", "daemon off;"]
