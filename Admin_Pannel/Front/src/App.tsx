@@ -42,10 +42,10 @@ const App = () => {
   const fetchData = async () => {
     try {
       setIsLoading(true)
-      const response = await fetch('http://176.123.178.135:8080/posts', {
+      const response = await fetch('/api/posts', {
         headers: {
           'Authorization': 'Basic QWlkYW5hOmFkbWlu',
-          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
         },
       })
       if (!response.ok) {

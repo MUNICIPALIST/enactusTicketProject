@@ -4,10 +4,11 @@ import "net/http"
 
 func CORSMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Разрешаем запросы с localhost:5173 (Vite dev server)
-		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
+		// Разрешаем все необходимые origins
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
 
 		// Обработка preflight запросов
 		if r.Method == "OPTIONS" {
